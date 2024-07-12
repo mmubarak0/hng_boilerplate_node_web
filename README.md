@@ -2,7 +2,9 @@
 
 ## Overview
 
-[Description]
+This project is a Node.js and TypeScript application that provides a RESTful API for [App Name]. It is built using the Express.js framework and uses a database to store and manage data. The application is designed to be scalable, maintainable, and easy to use.
+Swagger is used to document the API endpoints and provide a user-friendly interface for testing and exploring the API.
+it's located under the route `/api-docs`. if you want to access it, you can navigate to `http://localhost:5000/api-docs`.
 
 ## Folder Structure
 
@@ -29,7 +31,10 @@
 - TypeScript
 - Express
 - ts-node-dev
-- [Other dependencies]
+- cors
+- dotenv
+- swagger-ui-express
+- swagger-jsdoc
 
 ## Getting Started
 
