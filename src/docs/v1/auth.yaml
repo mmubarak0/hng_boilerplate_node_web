@@ -2,125 +2,253 @@ paths:
   /auth/login:
     post:
       tags:
-      - Auth
+        - Auth
       summary: User login
+      operationId: loginUser
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/auth_login_body'
-        required: true
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+              required:
+                - email
+                - password
       responses:
-        "200":
+        '200':
           description: Successful login
-        "401":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  fullName:
+                    type: string
+                  phone:
+                    type: string
+        '401':
           description: Invalid credentials
-        "422":
+        '422':
           description: Invalid input
+
   /auth/register:
     post:
       tags:
-      - Auth
+        - Auth
       summary: User registration
+      operationId: registerUser
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/auth_register_body'
-        required: true
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                fullName:
+                  type: string
+                phone:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - fullName
+                - phone
+                - password
       responses:
-        "201":
+        '201':
           description: User registered successfully
-        "422":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  fullName:
+                    type: string
+                  phone:
+                    type: string
+        '422':
           description: Invalid input/User already exists
+
   /auth/social:
     post:
       tags:
-      - Auth
+        - Auth
       summary: Social authentication
+      operationId: socialAuth
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/auth_social_body'
-        required: true
+              type: object
+              properties:
+                accessToken:
+                  type: string
+                  description: Access token obtained from social provider
+                provider:
+                  type: string
+                  description: Social provider (e.g., Facebook, Google)
+              required:
+                - accessToken
+                - provider
       responses:
-        "200":
+        '200':
           description: Successful authentication
-        "401":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  fullName:
+                    type: string
+        '401':
           description: Invalid credentials
+
   /auth/magic-link:
     post:
       tags:
-      - Auth
+        - Auth
       summary: Magic link authentication
+      operationId: magicLinkAuth
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/auth_magiclink_body'
-        required: true
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+              required:
+                - email
       responses:
-        "200":
-          description: Magic link sent
-        "401":
+        '200':
+          description: Check email for magic link
+        '401':
           description: Invalid email
-  /auth/change-password:
+
+  /auth/forgot-password:
     post:
       tags:
-      - Auth
-      summary: Change password
+        - Auth
+      summary: Forgot password
+      operationId: forgotPassword
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/auth_changepassword_body'
-        required: true
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+              required:
+                - email
       responses:
-        "200":
-          description: Password changed successfully
-        "401":
-          description: wrong old password
-        "422":
-          description: invalid input
-components:
-  schemas:
-    auth_login_body:
-      type: object
-      properties:
-        email:
-          type: string
-        password:
-          type: string
-    auth_register_body:
-      type: object
-      properties:
-        email:
-          type: string
-        password:
-          type: string
-        firstname:
-          type: string
-        lastname:
-          type: string
-        phone:
-          type: string
-    auth_social_body:
-      type: object
-      properties:
-        provider:
-          type: string
-        token:
-          type: string
-    auth_magiclink_body:
-      type: object
-      properties:
-        email:
-          type: string
-    auth_changepassword_body:
-      type: object
-      properties:
-        oldPassword:
-          type: string
-        newPassword:
-          type: string
+        '200':
+          description: Check email to reset password
+        '401':
+          description: Invalid email
+
+  /auth/reset-password:
+    post:
+      tags:
+        - Auth
+      summary: Reset password
+      operationId: resetPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: Reset token received via email
+                newPassword:
+                  type: string
+                  minLength: 6
+              required:
+                - token
+                - newPassword
+      responses:
+        '200':
+          description: Password reset successful
+        '401':
+          description: Token has expired
+
+  /auth/verify-email:
+    post:
+      tags:
+        - Auth
+      summary: Verify user's email
+      operationId: verifyEmail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: Verification token received via email
+              required:
+                - token
+      responses:
+        '200':
+          description: Email verified successfully
+        '401':
+          description: Invalid token
+
+  /auth/resend-token:
+    post:
+      tags:
+        - Auth
+      summary: Resend email verification token
+      operationId: resendToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+              required:
+                - email
+      responses:
+        '200':
+          description: Check email for new token
+        '401':
+          description: Invalid email
