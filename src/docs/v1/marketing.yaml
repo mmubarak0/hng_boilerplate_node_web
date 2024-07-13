@@ -1,9 +1,7 @@
 paths:
   /waitlist:
     post:
-      tags:
-      - Marketing
-      summary: Join waitlist
+      summary: Join OpenAI's waitlist
       requestBody:
         content:
           application/json:
@@ -13,10 +11,8 @@ paths:
       responses:
         "200":
           description: Waitlist entry created
-  /marketing-page:
+  /content:
     get:
-      tags:
-      - Marketing
       summary: Get marketing page content
       responses:
         "200":
@@ -24,12 +20,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_4'
+                $ref: '#/components/schemas/content_body'
   /invite:
     post:
-      tags:
-      - Marketing
-      summary: Invite a user
+      summary: Invite a user to join OpenAI's waitlist
       requestBody:
         content:
           application/json:
@@ -58,8 +52,4 @@ components:
           type: string
         value:
           type: string
-    user_invitelink_body:
-      type: object
-      properties:
-        email:
-          type: string
+
