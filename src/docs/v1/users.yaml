@@ -22,8 +22,6 @@ paths:
       - name: id
         in: path
         required: true
-        style: simple
-        explode: false
         schema:
           type: integer
       responses:
@@ -35,3 +33,14 @@ paths:
                 $ref: '#/components/schemas/inline_response_200'
         "404":
           description: User not found
+components:
+  schemas:
+    inline_response_200:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
