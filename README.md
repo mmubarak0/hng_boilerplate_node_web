@@ -19,7 +19,7 @@ Live API Documentation can be found here: [API Documentation](https://app-f891eb
 - It helps to understand the structure of the database and how data is stored and retrieved.
 - The ERD can be used to design and optimize the database schema, identify potential issues, and improve performance.
 
-![ERD](https://drive.google.com/file/d/1BRmo_QCYKpubAgBoF7QIZ66kH3ub_NxG/view?usp=sharing)
+![ERD](https://drive.google.com/uc?id=1BRmo_QCYKpubAgBoF7QIZ66kH3ub_NxG)
 
 ## Folder Structure
 
