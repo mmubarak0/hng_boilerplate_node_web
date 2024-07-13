@@ -495,7 +495,11 @@ components:
           type: string
         password:
           type: string
-        name:
+        firstname:
+          type: string
+        lastname:
+          type: string
+        phone:
           type: string
     auth_social_body:
       type: object
@@ -551,9 +555,13 @@ components:
       properties:
         id:
           type: integer
-        name:
+        firstname:
+          type: string
+        lastname:
           type: string
         email:
+          type: string
+        phone:
           type: string
     inline_response_200_1:
       type: object
@@ -561,6 +569,8 @@ components:
         id:
           type: integer
         name:
+          type: string
+        description:
           type: string
     inline_response_200_2:
       type: object
