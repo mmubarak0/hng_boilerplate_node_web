@@ -1,5 +1,7 @@
 paths:
+  # This endpoint represents the GDPR cookies settings.
   /gdpr/cookies:
+    # This endpoint is used to retrieve the GDPR cookies settings.
     get:
       tags:
       - GDPR
@@ -10,4 +12,67 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_4'
+                $ref: '#/components/schemas/gdpr_cookies_response'
+    # This endpoint is used to update the GDPR cookies settings.
+    put:
+      tags:
+      - GDPR
+      summary: Update GDPR cookies settings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/gdpr_cookies_settings'
+      responses:
+        "200":
+          description: GDPR cookies settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gdpr_cookies_response'
+  # This endpoint represents the GDPR cookies consent of the user to store cookies.
+  /gdpr/cookies/consent:
+    post:
+      tags:
+      - GDPR
+      summary: Give consent to cookies
+      responses:
+        "200":
+          description: Consent to cookies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gdpr_cookies_response'
+  # This endpoint is used to retrieve information about cookies.
+  /gdpr/cookies/info:
+    get:
+      tags:
+      - GDPR
+      summary: Get information about cookies
+      responses:
+        "200":
+          description: Information about cookies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gdpr_cookies_response'
+components:
+  schemas:
+    gdpr_cookies_settings:
+      type: object
+      properties:
+        settings:
+          type: object
+          format: json
+    gdpr_cookies_response:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        settings:
+          type: object
+          format: json

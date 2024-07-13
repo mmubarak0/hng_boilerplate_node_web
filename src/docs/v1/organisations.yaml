@@ -1,37 +1,125 @@
 paths:
-  /organizations:
+  /organisations:
     get:
+      summary: List all organisations
+      operationId: listOrganisations
       tags:
-      - Organizations
-      summary: Get list of organizations
+        - Organisations
       responses:
-        "200":
-          description: A list of organizations
+        '200':
+          description: A list of organisations
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_1'
-  /organizations/{id}:
-    get:
+                  $ref: '#/components/schemas/organisation'
+    post:
+      summary: Create a new Organisation
+      operationId: createOrganisation
       tags:
-      - Organizations
-      summary: Get an organization by ID
-      parameters:
-      - name: id
-        in: path
+        - Organisations
+      requestBody:
         required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/organisationCreate'
       responses:
-        "200":
-          description: A single organization
+        '201':
+          description: The Organisation has been successfully created.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
-        "404":
-          description: Organization not found
+                $ref: '#/components/schemas/organisation'
+  /organisations/{organisationId}:
+    get:
+      summary: Get details of a specific Organisation
+      operationId: getOrganisation
+      tags:
+        - Organisations
+      parameters:
+        - name: OrganisationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Details of the Organisation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organisation'
+    put:
+      summary: Update an Organisation
+      operationId: updateOrganisation
+      tags:
+        - Organisations
+      parameters:
+        - name: OrganisationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/organisationUpdate'
+      responses:
+        '200':
+          description: The Organisation has been successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organisation'
+    delete:
+      summary: Delete an Organisation
+      operationId: deleteOrganisation
+      tags:
+        - Organisations
+      parameters:
+        - name: OrganisationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: The Organisation has been successfully deleted.
+components:
+  schemas:
+    organisation:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the Organisation.
+        name:
+          type: string
+          description: The name of the Organisation.
+        description:
+          type: string
+          description: A brief description of the Organisation.
+    organisationCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the Organisation.
+        description:
+          type: string
+          description: A brief description of the Organisation.
+    organisationUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Organisation.
+        description:
+          type: string
+          description: A brief description of the Organisation.

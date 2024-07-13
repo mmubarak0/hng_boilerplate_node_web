@@ -2,8 +2,9 @@ paths:
   /notifications:
     get:
       tags:
-      - Notification
+        - Notification
       summary: Get list of notifications
+      operationId: listNotifications
       responses:
         "200":
           description: A list of notifications
@@ -12,4 +13,99 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_5'
+                  $ref: '#/components/schemas/Notification'
+    post:
+      tags:
+        - Notification
+      summary: Create a new notification
+      operationId: createNotification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewNotification'
+      responses:
+        "201":
+          description: Notification created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+        "400":
+          description: Invalid input
+    delete:
+      tags:
+        - Notification
+      summary: Delete all notifications
+      operationId: deleteNotifications
+      responses:
+        "204":
+          description: Notifications deleted
+  /notifications/{id}:
+    get:
+      tags:
+        - Notification
+      summary: Get a notification by ID
+      operationId: getNotificationById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the notification to retrieve
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A notification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+        "404":
+          description: Notification not found
+    delete:
+      tags:
+        - Notification
+      summary: Delete a notification
+      operationId: deleteNotification
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the notification to delete
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Notification deleted
+        "404":
+          description: Notification not found
+components:
+  schemas:
+    Notification:
+      type: object
+      required:
+        - message
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for a notification
+        message:
+          type: string
+          description: The notification message
+        timestamp:
+          type: string
+          format: date-time
+          description: The creation date of the notification
+    NewNotification:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: The notification message
