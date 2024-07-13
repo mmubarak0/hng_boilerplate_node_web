@@ -1,6 +1,8 @@
 paths:
   /user/profile:
     get:
+      tags:
+        - Current user
       summary: Get user profile
       responses:
         '200':
@@ -20,6 +22,8 @@ paths:
                     type: string
 
     put:
+      tags:
+        - Current user
       summary: Update user profile
       requestBody:
         required: true
@@ -42,6 +46,8 @@ paths:
 
   /data/export:
     get:
+      tags:
+        - Current user
       summary: Export data
       parameters:
         - name: category
