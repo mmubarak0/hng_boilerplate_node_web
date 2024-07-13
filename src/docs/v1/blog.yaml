@@ -1,29 +1,199 @@
 paths:
-  /content:
-    put:
-      tags:
-      - Blog
-      summary: Edit content
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/content_body'
-        required: true
-      responses:
-        "200":
-          description: Content updated
-  /blog:
+  /blog/posts:
     get:
       tags:
       - Blog
-      summary: Get list of blog posts
+      summary: Get all blog posts
       responses:
-        "200":
-          description: A list of blog posts
+        '200':
+          description: A list of all blog posts
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_6'
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    author:
+                      type: string
+                    date:
+                      type: string
+                      format: date
+                    featuredImage:
+                      type: string
+                      format: uri
+                    bodyContent:
+                      type: string
+  /blog/post:
+    post:
+      tags:
+      - Blog
+      summary: Create a blog post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The title of the blog post
+                author:
+                  type: string
+                  description: The author of the blog post
+                date:
+                  type: string
+                  format: date
+                  description: The publication date of the blog post
+                featuredImage:
+                  type: string
+                  format: uri
+                  description: URL of the featured image
+                bodyContent:
+                  type: string
+                  description: The content of the blog post
+              required:
+                - title
+                - author
+                - date
+                - bodyContent
+      responses:
+        '201':
+          description: Blog post created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: The ID of the created blog post
+                  title:
+                    type: string
+                  author:
+                    type: string
+                  date:
+                    type: string
+                    format: date
+                  featuredImage:
+                    type: string
+                    format: uri
+                  bodyContent:
+                    type: string
+        '422':
+          description: Invalid input
+  /blog/posts/{id}:
+    get:
+      tags:
+      - Blog
+      summary: Get a single blog post by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A single blog post
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  author:
+                    type: string
+                  date:
+                    type: string
+                    format: date
+                  featuredImage:
+                    type: string
+                    format: uri
+                  bodyContent:
+                    type: string
+        '404':
+          description: Blog post not found
+    put:
+      tags:
+      - Blog
+      summary: Edit a single blog post by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                author:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                featuredImage:
+                  type: string
+                  format: uri
+                bodyContent:
+                  type: string
+              required:
+                - title
+                - author
+                - date
+                - bodyContent
+      responses:
+        '200':
+          description: Blog post updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  author:
+                    type: string
+                  date:
+                    type: string
+                    format: date
+                  featuredImage:
+                    type: string
+                    format: uri
+                  bodyContent:
+                    type: string
+        '400':
+          description: Invalid input
+        '404':
+          description: Blog post not found
+    delete:
+      tags:
+      - Blog
+      summary: Delete a single blog post by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Blog post deleted successfully
+        '404':
+          description: Blog post not found

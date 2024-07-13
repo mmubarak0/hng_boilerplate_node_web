@@ -37,20 +37,6 @@ paths:
               schema:
                 type: string
                 format: binary
-  /user/invite-link:
-    post:
-      tags:
-      - Current user
-      summary: Generate invite link
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/user_invitelink_body'
-        required: true
-      responses:
-        "200":
-          description: Invite link generated
 components:
   schemas:
     user_body:

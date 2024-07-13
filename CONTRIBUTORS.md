@@ -4,6 +4,7 @@
 
 * [Contributor #1] @JxtBugs
 * [Contributor #2] @ki2kid
+* [Contributor #3] @chrismadufor
 * so on...
 
 

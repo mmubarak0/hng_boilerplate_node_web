@@ -62,7 +62,71 @@ paths:
         required: true
       responses:
         "200":
-          description: Magic link sent
+          description: Check email for magic link
+        "401":
+          description: Invalid email
+  /auth/forgot-password:
+    post:
+      tags:
+      - Auth
+      summary: Forgot password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auth_forgot_password_body'
+        required: true
+      responses:
+        "200":
+          description: Check email to reset password
+        "401":
+          description: Invalid email
+  /auth/reset-password:
+    post:
+      tags:
+      - Auth
+      summary: Reset password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auth_reset_password_body'
+        required: true
+      responses:
+        "200":
+          description: Password reset is successful
+        "401":
+          description: Token has expired
+  /auth/verify-email:
+    post:
+      tags:
+      - Auth
+      summary: Verify user's email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auth_verify_email_body'
+        required: true
+      responses:
+        "200":
+          description: Email verified successfully
+        "401":
+          description: Invalid token
+  /auth/resend-token:
+    post:
+      tags:
+      - Auth
+      summary: Resend email with token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auth_resend_token_body'
+        required: true
+      responses:
+        "200":
+          description: Check email for new token
         "401":
           description: Invalid email
   /auth/change-password:
@@ -116,6 +180,28 @@ components:
       type: object
       properties:
         email:
+          type: string
+    auth_forgot_password_body:
+      type: object
+      properties:
+        email:
+          type: string
+    auth_resend_token_body:
+      type: object
+      properties:
+        email:
+          type: string
+    auth_reset_password_body:
+      type: object
+      properties:
+        password:
+          type: string
+        token:
+          type: string
+    auth_verify_email_body:
+      type: object
+      properties:
+        token:
           type: string
     auth_changepassword_body:
       type: object

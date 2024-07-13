@@ -61,3 +61,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200_7'
+  /dashboard/invite-link:
+    post:
+      tags:
+      - Dashboard
+      summary: Generate invite link
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_invitelink_body'
+        required: true
+      responses:
+        "200":
+          description: Invite link generated
