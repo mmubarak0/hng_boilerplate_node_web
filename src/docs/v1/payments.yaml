@@ -25,6 +25,8 @@ paths:
 
   /payments/{id}:
     get:
+      tags:
+      - Payments
       summary: Get a single payment by ID
       parameters:
         - name: id
@@ -53,6 +55,8 @@ paths:
 
   /payments:
     post:
+      tags:
+      - Payments
       summary: Create a new payment
       requestBody:
         required: true
@@ -93,6 +97,8 @@ paths:
 
   /payments/stripe:
     post:
+      tags:
+      - Payments
       summary: Make a payment using Stripe
       requestBody:
         required: true
@@ -132,6 +138,8 @@ paths:
 
   /payments/flutterwave:
     post:
+      tags:
+      - Payments
       summary: Make a payment using Flutterwave
       requestBody:
         required: true
@@ -171,6 +179,8 @@ paths:
 
   /payments/lemonsqueezy:
     post:
+      tags:
+      - Payments
       summary: Make a payment using Lemonsqueezy
       requestBody:
         required: true
@@ -210,6 +220,8 @@ paths:
 
   /payments/verify:
     post:
+      tags:
+      - Payments
       summary: Verify a payment
       requestBody:
         required: true
