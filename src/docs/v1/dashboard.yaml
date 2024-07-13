@@ -1,4 +1,5 @@
 paths:
+  # This endpoint represents the activity log section of the dashboard.
   /dashboard/activity-log:
     get:
       tags:
@@ -12,7 +13,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_3'
+                  $ref: '#/components/schemas/activity_log'
+  # This endpoint represents the settings page of the dashboard.
   /dashboard/settings:
     get:
       tags:
@@ -24,7 +26,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_4'
+                $ref: '#/components/schemas/dashboard_settings'
+  # This endpoint represents the dashboard route.
   /dashboard:
     get:
       tags:
@@ -36,7 +39,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_4'
+                $ref: '#/components/schemas/get_dashboard_data'
+  # This endpoint represents the route for accessing the charts in the dashboard.
   /dashboard/charts:
     get:
       tags:
@@ -48,7 +52,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_4'
+                $ref: '#/components/schemas/chart_data'
+  # This endpoint is used to retrieve the language and region settings for the dashboard.
   /dashboard/language-region:
     get:
       tags:
@@ -60,4 +65,98 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_7'
+                $ref: '#/components/schemas/language_region_settings'
+  # This endpoint is used to retrieve the widgets for the dashboard.
+  /dashboard/widgets:
+    get:
+      tags:
+      - Dashboard
+      summary: Get widgets
+      responses:
+        "200":
+          description: Widgets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/widget'
+components:
+  schemas:
+    activity_log:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        action:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+    dashboard_settings:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        settings:
+          type: object
+          format: json
+    get_dashboard_data:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        data:
+          type: object
+          format: json
+    chart_data:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        data:
+          type: object
+          format: json
+    language_region_settings:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        language:
+          type: string
+        region:
+          type: string
+    widget:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        type:
+          type: string
+        data:
+          type: object
+          format: json
