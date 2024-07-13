@@ -9,7 +9,7 @@ const options = {
       version: '1.0.0',
     },
   },
-  apis: ['src/docs/*.yaml'],
+  apis: ['src/docs/v1/*.yaml'],
 };
 
 const specs = swaggerJsdoc(options);
