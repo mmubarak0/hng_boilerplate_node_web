@@ -1,0 +1,69 @@
+paths:
+  /messaging/email:
+    post:
+      tags:
+      - Messaging
+      summary: Send an email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/messaging_email_body'
+        required: true
+      responses:
+        "200":
+          description: Email sent
+  /email-templates:
+    get:
+      tags:
+      - Messaging
+      summary: Get list of email templates
+      responses:
+        "200":
+          description: A list of email templates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_8'
+  /email-templates/{id}:
+    put:
+      tags:
+      - Messaging
+      summary: Update email template
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/emailtemplates_id_body'
+        required: true
+      responses:
+        "200":
+          description: Email template updated
+components:
+  schemas:
+    messaging_email_body:
+      type: object
+      properties:
+        to:
+          type: string
+        subject:
+          type: string
+        body:
+          type: string
+    emailtemplates_id_body:
+      type: object
+      properties:
+        name:
+          type: string
+        html:
+          type: string

@@ -1,0 +1,63 @@
+paths:
+  /dashboard/activity-log:
+    get:
+      tags:
+      - Dashboard
+      summary: Get activity log
+      responses:
+        "200":
+          description: Activity log
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_3'
+  /dashboard/settings:
+    get:
+      tags:
+      - Dashboard
+      summary: Get settings
+      responses:
+        "200":
+          description: Settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+  /dashboard:
+    get:
+      tags:
+      - Dashboard
+      summary: Get basic dashboard data
+      responses:
+        "200":
+          description: Dashboard data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+  /dashboard/charts:
+    get:
+      tags:
+      - Dashboard
+      summary: Get chart data
+      responses:
+        "200":
+          description: Chart data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+  /dashboard/language-region:
+    get:
+      tags:
+      - Dashboard
+      summary: Get language and region settings
+      responses:
+        "200":
+          description: Language and region settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_7'

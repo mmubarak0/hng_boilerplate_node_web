@@ -1,0 +1,85 @@
+components:
+  schemas:
+    inline_response_200:
+      type: object
+      properties:
+        id:
+          type: integer
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+    inline_response_200_1:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+    inline_response_200_2:
+      type: object
+      properties:
+        id:
+          type: integer
+        amount:
+          type: number
+        currency:
+          type: string
+        status:
+          type: string
+    inline_response_200_3:
+      type: object
+      properties:
+        id:
+          type: integer
+        action:
+          type: string
+        timestamp:
+          type: string
+    inline_response_200_4:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    inline_response_200_5:
+      type: object
+      properties:
+        id:
+          type: integer
+        message:
+          type: string
+        timestamp:
+          type: string
+    inline_response_200_6:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        content:
+          type: string
+    inline_response_200_7:
+      type: object
+      properties:
+        language:
+          type: string
+        region:
+          type: string
+    inline_response_200_8:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        html:
+          type: string

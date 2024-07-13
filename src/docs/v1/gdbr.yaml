@@ -1,0 +1,13 @@
+paths:
+  /gdpr/cookies:
+    get:
+      tags:
+      - GDPR
+      summary: Get GDPR cookies settings
+      responses:
+        "200":
+          description: GDPR cookies settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'

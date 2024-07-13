@@ -1,0 +1,65 @@
+paths:
+  /waitlist:
+    post:
+      tags:
+      - Marketing
+      summary: Join waitlist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/waitlist_body'
+        required: true
+      responses:
+        "200":
+          description: Waitlist entry created
+  /marketing-page:
+    get:
+      tags:
+      - Marketing
+      summary: Get marketing page content
+      responses:
+        "200":
+          description: Marketing page content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+  /invite:
+    post:
+      tags:
+      - Marketing
+      summary: Invite a user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/invite_body'
+        required: true
+      responses:
+        "200":
+          description: Invite sent
+components:
+  schemas:
+    waitlist_body:
+      type: object
+      properties:
+        email:
+          type: string
+    invite_body:
+      type: object
+      properties:
+        email:
+          type: string
+    content_body:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    user_invitelink_body:
+      type: object
+      properties:
+        email:
+          type: string

@@ -1,0 +1,126 @@
+paths:
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: User login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auth_login_body'
+        required: true
+      responses:
+        "200":
+          description: Successful login
+        "401":
+          description: Invalid credentials
+        "422":
+          description: Invalid input
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: User registration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auth_register_body'
+        required: true
+      responses:
+        "201":
+          description: User registered successfully
+        "422":
+          description: Invalid input/User already exists
+  /auth/social:
+    post:
+      tags:
+      - Auth
+      summary: Social authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auth_social_body'
+        required: true
+      responses:
+        "200":
+          description: Successful authentication
+        "401":
+          description: Invalid credentials
+  /auth/magic-link:
+    post:
+      tags:
+      - Auth
+      summary: Magic link authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auth_magiclink_body'
+        required: true
+      responses:
+        "200":
+          description: Magic link sent
+        "401":
+          description: Invalid email
+  /auth/change-password:
+    post:
+      tags:
+      - Auth
+      summary: Change password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auth_changepassword_body'
+        required: true
+      responses:
+        "200":
+          description: Password changed successfully
+        "401":
+          description: wrong old password
+        "422":
+          description: invalid input
+components:
+  schemas:
+    auth_login_body:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    auth_register_body:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        phone:
+          type: string
+    auth_social_body:
+      type: object
+      properties:
+        provider:
+          type: string
+        token:
+          type: string
+    auth_magiclink_body:
+      type: object
+      properties:
+        email:
+          type: string
+    auth_changepassword_body:
+      type: object
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          type: string

@@ -1,0 +1,62 @@
+paths:
+  /user:
+    get:
+      tags:
+      - Current user
+      summary: Get user profile
+      responses:
+        "200":
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+    put:
+      tags:
+      - Current user
+      summary: Update user profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_body'
+        required: true
+      responses:
+        "200":
+          description: User profile updated
+  /user/data-export:
+    get:
+      tags:
+      - Current user
+      summary: Export user data
+      responses:
+        "200":
+          description: User data exported
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+  /user/invite-link:
+    post:
+      tags:
+      - Current user
+      summary: Generate invite link
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_invitelink_body'
+        required: true
+      responses:
+        "200":
+          description: Invite link generated
+components:
+  schemas:
+    user_body:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string

@@ -1,0 +1,26 @@
+paths:
+  /contact-us:
+    post:
+      tags:
+      - Contact us
+      summary: Contact us form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contactus_body'
+        required: true
+      responses:
+        "200":
+          description: Message sent
+components:
+  schemas:
+    contactus_body:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        message:
+          type: string
