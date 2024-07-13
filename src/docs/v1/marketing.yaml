@@ -1,7 +1,7 @@
 paths:
   /waitlist:
     post:
-      summary: Join OpenAI's waitlist
+      summary: Join waitlist
       requestBody:
         content:
           application/json:
@@ -23,7 +23,7 @@ paths:
                 $ref: '#/components/schemas/content_body'
   /invite:
     post:
-      summary: Invite a user to join OpenAI's waitlist
+      summary: Invite a user to join waitlist
       requestBody:
         content:
           application/json:
