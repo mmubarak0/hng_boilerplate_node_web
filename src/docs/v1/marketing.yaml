@@ -1,6 +1,8 @@
 paths:
   /waitlist:
     post:
+      tags:
+        - Marketing
       summary: Join waitlist
       requestBody:
         content:
@@ -13,6 +15,8 @@ paths:
           description: Waitlist entry created
   /content:
     get:
+      tags:
+        - Marketing
       summary: Get marketing page content
       responses:
         "200":
@@ -23,6 +27,8 @@ paths:
                 $ref: '#/components/schemas/content_body'
   /invite:
     post:
+      tags:
+        - Marketing
       summary: Invite a user to join waitlist
       requestBody:
         content:
