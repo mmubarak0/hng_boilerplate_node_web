@@ -5,7 +5,8 @@
 * [Contributor #1] @JxtBugs
 * [Contributor #2] @ki2kid
 * [Contributor #3] @chrismadufor
-* [Contributor #2] @kabirlamin
+* [Contributor #4] @kabirlamin
+* [Contributor #5] @Tanjiro
 * so on...
 
 
