@@ -22,38 +22,6 @@ paths:
                       type: number
                     metadata:
                       type: object
-
-  /payments/{id}:
-    get:
-      tags:
-      - Payments
-      summary: Get a single payment by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Details of the payment
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  email:
-                    type: string
-                  amount:
-                    type: number
-                  metadata:
-                    type: object
-                  reference:
-                    type: string
-
-  /payments:
     post:
       tags:
       - Payments
@@ -94,6 +62,36 @@ paths:
                     example: Payment successfully initiated
         '422':
           description: Invalid input
+
+  /payments/{id}:
+    get:
+      tags:
+      - Payments
+      summary: Get a single payment by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Details of the payment
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  email:
+                    type: string
+                  amount:
+                    type: number
+                  metadata:
+                    type: object
+                  reference:
+                    type: string
 
   /payments/stripe:
     post:
