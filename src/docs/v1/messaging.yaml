@@ -1,22 +1,24 @@
 paths:
-  /messaging/email:
+  /messages/send:
     post:
       tags:
-      - Messaging
+      - Messages
       summary: Send an email
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/messaging_email_body'
+              $ref: '#/components/schemas/messages_email_body'
         required: true
       responses:
         "200":
           description: Email sent
-  /email-templates:
+        "422":
+          description: Invalid input
+  /messages/templates:
     get:
       tags:
-      - Messaging
+      - Messages
       summary: Get list of email templates
       responses:
         "200":
@@ -26,11 +28,24 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_8'
-  /email-templates/{id}:
+                  $ref: '#/components/schemas/templates_email_body'
+    post:
+      tags:
+      - Messages
+      summary: Create email template
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templates_email_create'
+        required: true
+      responses:
+        "200":
+          description: Email template created
+  /messages/templates/{id}:
     put:
       tags:
-      - Messaging
+      - Messages
       summary: Update email template
       parameters:
       - name: id
@@ -44,25 +59,45 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/emailtemplates_id_body'
+              $ref: '#/components/schemas/templates_email_update'
         required: true
       responses:
         "200":
           description: Email template updated
 components:
   schemas:
-    messaging_email_body:
+    messages_email_body:
       type: object
       properties:
+        id:
+          type: string
+        from:
+          type: string
         to:
           type: string
         subject:
           type: string
         body:
           type: string
-    emailtemplates_id_body:
+    templates_email_update:
       type: object
       properties:
+        name:
+          type: string
+        html:
+          type: string
+    templates_email_create:
+      type: object
+      properties:
+        name:
+          type: string
+        html:
+          type: string
+    templates_email_body:
+      type: object
+      properties:
+        id:
+          type: integer
         name:
           type: string
         html:
