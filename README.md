@@ -3,8 +3,21 @@
 ## Overview
 
 This project is a Node.js and TypeScript application that provides a RESTful API for [App Name]. It is built using the Express.js framework and uses a database to store and manage data. The application is designed to be scalable, maintainable, and easy to use.
-Swagger is used to document the API endpoints and provide a user-friendly interface for testing and exploring the API.
-it's located under the route `/api-docs`. if you want to access it, you can navigate to `http://localhost:5000/api-docs`.
+
+### API Documentation
+        - Swagger is used to document the API endpoints and provide a user-friendly interface for testing and exploring the API.
+        - if you want to access it, you can navigate to `http://localhost:5000/api-docs`.
+        - The API documentation provides detailed information about each endpoint, including the request and response formats, query parameters, and status codes.
+        - You can use the Swagger UI to test the API endpoints and see the responses in real-time.
+
+Live API Documentation can be found here: [API Documentation](https://app-f891eba2-a596-4d4b-b8c8-91338a9c6940.cleverapps.io/api-docs/)
+
+### Entity Relationship Diagram (ERD)
+        - The ERD provides a visual representation of the database schema and the relationships between different entities.
+        - It helps to understand the structure of the database and how data is stored and retrieved.
+        - The ERD can be used to design and optimize the database schema, identify potential issues, and improve performance.
+
+![ERD](erd/url)
 
 ## Folder Structure
 
